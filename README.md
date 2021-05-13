@@ -43,7 +43,7 @@ calendar week | task
 Evaluation plan
 ---------------
 
-The project will be regarded a ...\
+The project will be regarded a ...
  - ___minor success___     		>>>  if we manage to implement a hardcoded light color challenge prototype
  - ___moderate success___  		>>>  if we manage to implement an easily initializable prototpye
  - ___mayor success___     		>>>  if we manage to implement one of the possible extensions
