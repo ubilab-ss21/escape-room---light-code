@@ -46,5 +46,5 @@ Evaluation plan
 The project will be regarded a ...
  - ___minor success___     		>>>  if we manage to implement a hardcoded light color challenge prototype
  - ___moderate success___  		>>>  if we manage to implement an easily initializable prototpye
- - ___mayor success___     		>>>  if we manage to implement one of the possible extensions
+ - ___major success___     		>>>  if we manage to implement one of the possible extensions
  - ___magnificent success___	>>>  if we manage to implement at least two extensions
