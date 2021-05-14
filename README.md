@@ -18,7 +18,7 @@ Possible extensions
 -------------------
 
 There are several extensions that could be tackled if progress should be quick:
- - integration into Area 069
+ - integration into Area 079
  - integration of off-the-shelf smart lighting systems
  - enhanced interface of master system for easy integration into an escape room (e.g. button activation by other riddle)
  - more advanced rules like behaviour dependent on simultanious button presses
