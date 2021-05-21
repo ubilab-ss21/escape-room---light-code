@@ -50,7 +50,7 @@ The project will be regarded a ...
  - ___magnificent success___	>>>  if we manage to implement at least two extensions
 
 
-Evaluation plan
+BOM Link
 ---------------
-BOM Link: https://octopart.com/bom-tool/5xsz3Dhn
+Octopart: https://octopart.com/bom-tool/5xsz3Dhn
 
