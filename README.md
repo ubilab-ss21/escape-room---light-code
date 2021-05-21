@@ -48,3 +48,9 @@ The project will be regarded a ...
  - ___moderate success___  		>>>  if we manage to implement an easily initializable prototpye
  - ___major success___     		>>>  if we manage to implement one of the possible extensions
  - ___magnificent success___	>>>  if we manage to implement at least two extensions
+
+
+Evaluation plan
+---------------
+BOM Link: https://octopart.com/bom-tool/5xsz3Dhn
+
