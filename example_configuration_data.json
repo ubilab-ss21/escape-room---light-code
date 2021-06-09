@@ -10,7 +10,7 @@
 		} ,
 		{
 		    "change_light_id" : "LIGHT_2_ID" ,
-		    "change" : 1
+		    "change" : 3
 		}
 	    ]
         } ,
@@ -18,10 +18,6 @@
 	    "button_id" : "BUTTON_1_ID" ,
 	    "inital_state" : "active" ,
 	    "actions" : [
-		{
-		    "change_light_id" : "LIGHT_0_ID" , 
-		    "change" : 1
-		} ,
 		{
 		    "change_light_id" : "LIGHT_2_ID" ,
 		    "change" : 1
@@ -34,10 +30,14 @@
 	    "actions" : [
 		{
 		    "change_light_id" : "LIGHT_0_ID" , 
-		    "change" : 1
+		    "change" : 4
 		} ,
 		{
-		    "change_light_id" : "LIGHT_1_ID" ,
+		    "change_light_id" : "LIGHT_1_ID" , 
+		    "change" : 2
+		} ,
+		{
+		    "change_light_id" : "LIGHT_2_ID" ,
 		    "change" : 1
 		}
 	    ]
@@ -50,12 +50,12 @@
 	} ,
 	{
 	    "light_id" : "LIGHT_1_ID" ,
-	    "colors" : [ "ff0000" , "ff00ff" , "0000ff" , "00ffff" , "00ff00" , "ffff00" , "ffffff" ]
+	    "colors" : [ "ff0000" , "00ffff" , "ffff00" , "ffffff" ]
 	} ,
 	{
 	    "light_id" : "LIGHT_2_ID" ,
-	    "colors" : [ "ff0000" , "ff00ff" , "0000ff" , "00ffff" , "00ff00" , "ffff00" , "ffffff" ]
+	    "colors" : [ "0000ff" , "00ff00" , "ff0000" ]
 	}
     ] ,
-    "code" : [ 2 , 4 , 1 ]
+    "code" : [ 4 , 2 , 0 ]
 }
