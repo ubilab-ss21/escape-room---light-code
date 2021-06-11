@@ -64,13 +64,21 @@ void setup() {
 
   byte num_buttons = doc["buttons"].size();
   bool buttons_active[num_buttons];
-  /*  NOTE: this is still work in progress
+  /*
   i want an array that tells me:
     if button b is pressed,
     take buttons_numActions[b] actions,
     that is, for each action a in buttons_actions[b]:
       advance light no buttons_actions[b][a][0] by buttons_actions[b][a][1] steps
+      { { { light changed , how much it changes }==action 1 of button 1 ,
+          { action 2 of button 1 }
+	} all actions of button 1 ,
+	{ all actions of button 2 }
+	...
+      }
+
   it's gonna be tough :( ...
+  */
   byte buttons_numActions[num_buttons];
   byte* buttons_actions[num_buttons];
   for (byte b = 0 ; b < num_buttons ; b++ ) {
@@ -78,7 +86,6 @@ void setup() {
     byte buttons_actions[b]
     buttons_actions[b] = (byte *) malloc(2*buttons_numActions[b]);
   }
-  */
 
   byte num_lights = doc["lights"].size();
   byte lights_state[num_lights];
