@@ -78,7 +78,6 @@ void setup() {
       }
 
   it's gonna be tough :( ...
-  */
   byte buttons_numActions[num_buttons];
   byte* buttons_actions[num_buttons];
   for (byte b = 0 ; b < num_buttons ; b++ ) {
@@ -86,6 +85,7 @@ void setup() {
     byte buttons_actions[b]
     buttons_actions[b] = (byte *) malloc(2*buttons_numActions[b]);
   }
+  */
 
   byte num_lights = doc["lights"].size();
   byte lights_state[num_lights];
