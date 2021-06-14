@@ -57,14 +57,14 @@ Here is how that would look like for BUTTON_0_ID:
 
 ![example button 0](images/pt-net-example-b0.png)
 
-Naturaly one would think that the capacities of the light states would be the number of states that light can take, i.e. the size of its "colors" array.
+Naturaly one would think that the capacities of the lights "state" would be the number of states that this light can take, i.e. the size of its "colors" array.
 But since the state of the light can role over, for example if the current state of LIGHT_0_ID is 5 (from 0,1,...,6) and BUTTON_2_ID is pressed,
-the following state would be (5 + 4) % 7 = 2, we will model a light that can take S many states to be in state s ( 0 <= s < S ), if it has s or s + S many tokens.
+the following state would be (5 + 4) mod 7 = 2, we will model a light that can take S many states to be in state s ( 0 <= s < S ), if it has s or s + S many tokens.
+Therefore the capacity of each lights "state" place as well as their "pool" place will be S + (S-1).
 This way button presses like the one mentioned can still be modeled, and we only need to add a "roleover" transition for each light
 that takes S tokens out of its "state" place and puts them back into its "pool" place.
 
-Since the initial state is always the first color in each lights "colors" array, the initial state of each light is 0 and all their "state" places will be empty.
-The capazities of "state" and "pool" places will be S + (S-1) and the "pool" places will be initially at max capacity.
+Since the initial state is always the first color in each lights "colors" array, the initial state of each light is 0 and all their "state" places will be empty and the "pool" places will be initially at max capacity.
 
 All put together, this will result in the following p/t net that models the given example configuration:
 
