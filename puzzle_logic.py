@@ -1,11 +1,20 @@
 import paho.mqtt.client as mqtt
 import json
 import time
+import os
+
+clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
+clearConsole()
+loop = True
 
 mqttBroker = "earth.informatik.uni-freiburg.de"
 main_topic = "ubilab/colorcode/"
 lights_cli = mqtt.Client("lights_publisher")
 lights_cli.connect(mqttBroker)
+
+with open('example_configuration_data1.json', 'r') as json_file:
+    data = json_file.read() 
+config = json.loads(data)     
 
 def button_init_state(index):
     return config['buttons'][index]['initial_state'] == "active"
@@ -17,9 +26,12 @@ def init_button_client(index):
             next_state = ( lights_state[light_index] + action['by_this_many_steps'] ) % len(light['colors'])
             lights_state[light_index] = next_state
             lights_cli.publish(main_topic + light['light_id'], light['colors'][next_state],retain=False)
-        print("\n\t current state is {}".format(lights_state))
+        clearConsole()
+        print("Target \t\t{}".format(config['code']))
+        print("Current State \t{}".format(lights_state))
         if config['code'] == lights_state:
-            print("\n\t\tCONGRATS, riddle solved!!!")
+            print("CONGRATS, You are out of here!!!")
+            for light in config['lights']:                                                                                                                                                            lights_cli.publish(main_topic + light['light_id'], "C",retain=False) 
             loop = False
 
     client = mqtt.Client("buttons_listener_" + str(index))
@@ -29,56 +41,42 @@ def init_button_client(index):
     client.loop_start()
     return client
 
-with open('example_configuration_data.json', 'r') as json_file:
+with open('example_configuration_data1.json', 'r') as json_file:
     data = json_file.read()
 
 config = json.loads(data)
 
-print("initializing buttons ...")
+print("ARE YOU READY TO BE TRAPPED ???")
+time.sleep(1)
+
+print("Initializing Buttons....")
+time.sleep(1)
+
 num_buttons    = len(config['buttons'])
 buttons_active = [button_init_state(index)  for index in range(num_buttons)]
 buttons_cli    = [init_button_client(index) for index in range(num_buttons)]
-print("buttons initialized ...")
 
-print("initializing lights ...")
+print("Buttons Initialized....")
+time.sleep(1)
+
+print("Initializing Lights....")
 num_lights     = len(config['lights'])
 lights_state   = [0] * num_lights
 for light in config['lights']:
     lights_cli.publish(main_topic + light['light_id'], light['colors'][0],retain=False)
-print("lights initialized ...")
 
-loop = True
+time.sleep(1)
+print("Lights Initialized ...")
+time.sleep(1)
+print("\nHERE WE GO")
+time.sleep(1)
+clearConsole()
+
+print("Target \t\t{}".format(config['code']))     
+print("Current State \t{}".format(lights_state))   
+
 while loop:
-    loop = input("end program? [y/n]").lower()[0] != 'y'
+    loop = input().lower()[0] != 'y'
 
 for client in buttons_cli:
     client.loop_stop()
-
-
-
-
-# i'll probably not need this any longer, but won't hurt to have it here for now ...
-'''
-  /*
-  i want an array that tells me:
-    if button b is pressed,
-    take buttons_numActions[b] actions,
-    that is, for each action a in buttons_actions[b]:
-      advance light no buttons_actions[b][a][0] by buttons_actions[b][a][1] steps
-      { { { light changed , how much it changes }==action 1 of button 1 ,
-          { action 2 of button 1 }
-	} all actions of button 1 ,
-	{ all actions of button 2 }
-	...
-      }
-
-  it's gonna be tough :( ...
-  byte buttons_numActions[num_buttons];
-  byte* buttons_actions[num_buttons];
-  for (byte b = 0 ; b < num_buttons ; b++ ) {
-    buttons_numActions[b] = doc["buttons"][b]["actions"].size();
-    byte buttons_actions[b]
-    buttons_actions[b] = (byte *) malloc(2*buttons_numActions[b]);
-  }
-  */
-'''

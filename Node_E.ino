@@ -19,8 +19,8 @@ int buttonState=0;
 unsigned long previousMillis = 0, previousMillis1 = 0;
 int interval = 200;
 
-WiFiClient node2_saba;
-PubSubClient client(node2_saba);
+WiFiClient node4_saba;
+PubSubClient client(node4_saba);
 
 // for setting all lights to off
 void colorWipe(uint32_t c, uint8_t wait) {
@@ -33,7 +33,7 @@ void colorWipe(uint32_t c, uint8_t wait) {
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
-    if (client.connect("node2_saba")) {
+    if (client.connect("node4_saba")) {
       Serial.println("connected");
     }else{
       Serial.print("failed, rc=");
@@ -117,8 +117,8 @@ void loop() {
     previousMillis = currentMillis;  
     buttonState = digitalRead(19);
     if ( buttonState == HIGH){
-      client.publish("ubilab/colorcode/BUTTON_2_ID","a",false);
+      client.publish("ubilab/colorcode/BUTTON_4_ID","a",false);
     }
-    client.subscribe("ubilab/colorcode/LIGHT_02_ID");
+    client.subscribe("ubilab/colorcode/LIGHT_04_ID");
   }
 }
