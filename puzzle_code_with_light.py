@@ -18,7 +18,6 @@ config = json.loads(data)
 
 for digit in config['code'][::-1]: 
     lights_cli.publish(main_topic + 'code', digit, retain=False)
-    #time.sleep(1)
 lights_cli.publish(main_topic + 'code', 'D', retain=False)
 
 def button_init_state(index):
@@ -37,6 +36,7 @@ def init_button_client(index):
         if config['code'] == lights_state:
             print("CONGRATS, You are out of here!!!")
             for light in config['lights']:                                                                                                                                                            lights_cli.publish(main_topic + light['light_id'], "C",retain=False) 
+            lights_cli.publish(main_topic + 'code', "C" , retain=False)
             loop = False
 
     client = mqtt.Client("buttons_listener_" + str(index))

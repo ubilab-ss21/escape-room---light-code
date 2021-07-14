@@ -64,17 +64,17 @@ void callback(char* topic, byte* payload, unsigned int length){
       code=0;
       l=0;
       for (int j=0; j<100; j++) {  
-      	for (int q=0; q < 3; q++) {
-      		for (int i=0; i < pixels.numPixels(); i=i+3) {
-      			pixels.setPixelColor(i+q, pixels.Color(0,0,127)); 
-      		}
-      		pixels.show();
-      		delay(50);
-      		for (int i=0; i < pixels.numPixels(); i=i+3)
-      		{
-      			pixels.setPixelColor(i+q, 0); 
-      		}
-      	}	
+        for (int q=0; q < 3; q++) {
+          for (int i=0; i < pixels.numPixels(); i=i+3) {
+            pixels.setPixelColor(i+q, pixels.Color(0,0,127)); 
+          }
+          pixels.show();
+          delay(50);
+          for (int i=0; i < pixels.numPixels(); i=i+3)
+          {
+            pixels.setPixelColor(i+q, 0); 
+          }
+        }
       }
       pixels.show();
   }
@@ -113,23 +113,23 @@ void loop() {
   
   if(start_display==1)
   {
-     for (int j=0; j<10; j++) {  
-     	for (int q=0; q < 3; q++) {
-	   for (int i=0; i < pixels.numPixels(); i=i+3) {
-              pixels.setPixelColor(i+q, pixels.Color(255,255,255)); 
-           }
-     pixels.show();
-     delay(50);
-     for (int i=0; i < pixels.numPixels(); i=i+3)
-     {
-       pixels.setPixelColor(i+q, 0); 
-     }
-            }
-         }
-         pixels.show();
-     int code_temp=code;
-     while(code_temp>0)
-     {
+    for (int j=0; j<10; j++) {  
+      for (int q=0; q < 3; q++) {
+        for (int i=0; i < pixels.numPixels(); i=i+3) {
+          pixels.setPixelColor(i+q, pixels.Color(255,255,255)); 
+        }
+        pixels.show();
+        delay(50);
+        for (int i=0; i < pixels.numPixels(); i=i+3)
+        {
+          pixels.setPixelColor(i+q, 0); 
+        }
+      }
+    }
+    pixels.show();
+    int code_temp=code;
+    while(code_temp>0)
+    {
       light_number = code_temp%10;
       code_temp=code_temp/10;
       Serial.println(light_number);
@@ -140,11 +140,11 @@ void loop() {
         int a = rand() % 16;
         if(arr[a]!=0)
         {
-            arr[a]=0;
-            pixels.setPixelColor(a, pixels.Color(light[light_number][0],light[light_number][1],light[light_number][2])); // Moderately bright green color.
-            pixels.show();
-            delay(1000); // Delay for a period of time (in milliseconds).
-            i++;
+          arr[a]=0;
+          pixels.setPixelColor(a, pixels.Color(light[light_number][0],light[light_number][1],light[light_number][2])); // Moderately bright green color.
+          pixels.show();
+          delay(1000); // Delay for a period of time (in milliseconds).
+          i++;
         }
       }
       colorWipe(pixels.Color(0, 0, 0), 50); 

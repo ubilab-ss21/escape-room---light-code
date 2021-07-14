@@ -17,7 +17,7 @@ int buttonState=0;
 
 // definition for psuedo delay
 unsigned long previousMillis = 0, previousMillis1 = 0;
-int interval = 200;
+int interval = 350;
 
 WiFiClient node3_saba;
 PubSubClient client(node3_saba);
