@@ -1,0 +1,153 @@
+#include "WiFi.h"
+#include <PubSubClient.h>
+#include <Adafruit_NeoPixel.h> 
+
+const char* ssid = "ZYXEL-036";
+const char* password = "8991401155431659";
+
+#define mqtt_server "earth.informatik.uni-freiburg.de"
+#define PIN 23  // data pin for ring
+#define NUMPIXELS 16   // number of lights on ring
+
+//for enabling number of lights and input signal pin
+Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+// variable for reading in push button state
+int buttonState=0;
+
+// definition for psuedo delay
+unsigned long previousMillis = 0, previousMillis1 = 0;
+int interval = 200;
+
+WiFiClient node0_saba;
+PubSubClient client(node0_saba);
+
+// for setting all lights to off
+void colorWipe(uint32_t c, uint8_t wait) {
+  for(uint16_t i=0; i < pixels.numPixels(); i++) {
+    pixels.setPixelColor(i, c);
+    pixels.show();
+  }
+}
+
+void reconnect() {
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    if (client.connect("node0_saba")) {
+      Serial.println("connected");
+    }else{
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+    }
+  }
+}
+
+//light values
+int light[7][3] =  {{255,255,255},{255,255,0},{255,0,255},{255,0,0},{0,255,255},{0,255,0},{0,0,255}};
+int l=0;
+int code=0;
+int start_display=0;
+void callback(char* topic, byte* payload, unsigned int length){
+  int l =(char)payload[0] - 48;
+  if(l==20)
+  {
+      start_display=1;
+  }
+  if(l!=20 && l!=19)
+  {
+      code=code*10+l;
+      Serial.println(code);
+  }
+  if(l==19)
+  {
+      start_display=0;
+      code=0;
+      l=0;
+      for (int j=0; j<100; j++) {  
+      	for (int q=0; q < 3; q++) {
+      		for (int i=0; i < pixels.numPixels(); i=i+3) {
+      			pixels.setPixelColor(i+q, pixels.Color(0,0,127)); 
+      		}
+      		pixels.show();
+      		delay(50);
+      		for (int i=0; i < pixels.numPixels(); i=i+3)
+      		{
+      			pixels.setPixelColor(i+q, 0); 
+      		}
+      	}	
+      }
+      pixels.show();
+  }
+}
+
+void setup() { 
+  WiFi.begin(ssid, password);
+  Serial.begin(115200);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.println("Connecting to WiFi..");
+  }
+  pinMode (19 , INPUT);
+  pinMode (23 , INPUT);
+  pinMode (18 , INPUT);
+  Serial.println("Connected to the WiFi network");
+  client.setServer(mqtt_server, 1883);
+  client.setCallback(callback);
+  pixels.setBrightness(150);
+  pixels.begin(); //initializing the light ring
+}
+
+
+int light_number=0;
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;  
+    client.subscribe("ubilab/colorcode/code");
+  }
+  
+  if(start_display==1)
+  {
+     for (int j=0; j<10; j++) {  
+     	for (int q=0; q < 3; q++) {
+	   for (int i=0; i < pixels.numPixels(); i=i+3) {
+              pixels.setPixelColor(i+q, pixels.Color(255,255,255)); 
+           }
+     pixels.show();
+     delay(50);
+     for (int i=0; i < pixels.numPixels(); i=i+3)
+     {
+       pixels.setPixelColor(i+q, 0); 
+     }
+            }
+         }
+         pixels.show();
+     int code_temp=code;
+     while(code_temp>0)
+     {
+      light_number = code_temp%10;
+      code_temp=code_temp/10;
+      Serial.println(light_number);
+      int arr[20]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+      int i=0;
+      while(i<light_number)
+      {
+        int a = rand() % 16;
+        if(arr[a]!=0)
+        {
+            arr[a]=0;
+            pixels.setPixelColor(a, pixels.Color(light[light_number][0],light[light_number][1],light[light_number][2])); // Moderately bright green color.
+            pixels.show();
+            delay(1000); // Delay for a period of time (in milliseconds).
+            i++;
+        }
+      }
+      colorWipe(pixels.Color(0, 0, 0), 50); 
+    }
+  }
+}
