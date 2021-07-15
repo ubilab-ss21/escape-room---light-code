@@ -12,11 +12,11 @@ main_topic = "ubilab/colorcode/"
 lights_cli = mqtt.Client("lights_publisher")
 lights_cli.connect(mqttBroker)
 
-with open('example_configuration_data1.json', 'r') as json_file:
+with open('example_configuration_data_2.json', 'r') as json_file:
     data = json_file.read() 
 config = json.loads(data)     
 
-for digit in config['code'][::-1]: 
+for digit in config['code']: #[::-1]: 
     lights_cli.publish(main_topic + 'code', digit, retain=False)
 lights_cli.publish(main_topic + 'code', 'D', retain=False)
 

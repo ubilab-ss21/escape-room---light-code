@@ -12,7 +12,7 @@ main_topic = "ubilab/colorcode/"
 lights_cli = mqtt.Client("lights_publisher")
 lights_cli.connect(mqttBroker)
 
-with open('example_configuration_data1.json', 'r') as json_file:
+with open('example_configuration_data_2.json', 'r') as json_file:
     data = json_file.read() 
 config = json.loads(data)     
 
@@ -41,10 +41,6 @@ def init_button_client(index):
     client.loop_start()
     return client
 
-with open('example_configuration_data1.json', 'r') as json_file:
-    data = json_file.read()
-
-config = json.loads(data)
 
 print("ARE YOU READY TO BE TRAPPED ???")
 time.sleep(1)

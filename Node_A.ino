@@ -2,8 +2,8 @@
 #include <PubSubClient.h>
 #include <Adafruit_NeoPixel.h> 
 
-const char* ssid = "WIFI_SSID";
-const char* password = "pass";
+const char* ssid = "ZYXEL-036";
+const char* password = "8991401155431659";
 
 #define mqtt_server "earth.informatik.uni-freiburg.de"
 #define PIN 23  // data pin for ring
@@ -17,7 +17,7 @@ int buttonState=0;
 
 // definition for psuedo delay
 unsigned long previousMillis = 0, previousMillis1 = 0;
-int interval = 250;
+int interval = 350;
 
 WiFiClient node0_saba;
 PubSubClient client(node0_saba);
@@ -55,36 +55,41 @@ void callback(char* topic, byte* payload, unsigned int length){
     pixels.show();
     int arr[20]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     int i=0;
-    while(i<l && l!=19)
+    int color_value = rand () % 7;
+    while(i<l && l!=19 && l!=0)
     {
         int a = rand() % 16;
         if(arr[a]!=0)
         {
             arr[a]=0;
-            pixels.setPixelColor(a, pixels.Color(light[l][0],light[l][1],light[l][2])); // Moderately bright green color.
+            pixels.setPixelColor(a, pixels.Color(light[color_value][0],light[color_value][1],light[color_value][2])); // Moderately bright green color.
             pixels.show();
             delay(100); // Delay for a period of time (in milliseconds).
             i++;
         }
     }
-        if(l==19)
-        {
-          //animation
-          for (int j=0; j<100; j++) {  
-            for (int q=0; q < 3; q++) {
-              for (int i=0; i < pixels.numPixels(); i=i+3) {
-                  pixels.setPixelColor(i+q, pixels.Color(0,0,127)); 
-              }
-              pixels.show();
-              delay(50);
-              for (int i=0; i < pixels.numPixels(); i=i+3)
-              {
-                pixels.setPixelColor(i+q, 0); 
-              }
-            }
-         }
-         pixels.show();
-       }
+    if(l==0)
+    {
+        colorWipe(pixels.Color(light[color_value][0],light[color_value][1],light[color_value][2]), 50);
+    }
+    if(l==19)
+    {
+      //animation
+      for (int j=0; j<100; j++) {  
+        for (int q=0; q < 3; q++) {
+          for (int i=0; i < pixels.numPixels(); i=i+3) {
+            pixels.setPixelColor(i+q, pixels.Color(0,0,127)); 
+          }
+          pixels.show();
+          delay(50);
+          for (int i=0; i < pixels.numPixels(); i=i+3)
+          {
+            pixels.setPixelColor(i+q, 0); 
+          }
+        }
+      }
+      pixels.show();
+    }
   }
 }
 
@@ -97,7 +102,6 @@ void setup() {
   }
   pinMode (19 , INPUT);
   pinMode (23 , INPUT);
-  pinMode (18 , INPUT);
   Serial.println("Connected to the WiFi network");
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
