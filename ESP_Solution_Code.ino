@@ -154,7 +154,6 @@ void loop() {
       {
         colorWipe(pixels.Color(light[color_value][0],light[color_value][1],light[color_value][2]), 50);
       }
-      delay(1000);
       colorWipe(pixels.Color(0, 0, 0), 50);
       p++;
       
