@@ -19,13 +19,25 @@ A detailed guide on how to setup the Config file for different configurations is
 
 Right now, the digits in the sequence are in the range [0-6].
 
+There are three setups:
+- **puzzle_logic.py**       : Uses preset config files to solve a preset code found in the config file. Works only with display.
+- **puzzle_code_with_light.py**       : Uses preset config files to solve a preset code found in the config file. Works only with display and animated light sequence.
+- **puzzle_randomized_code_with_light.py**       : Uses preset config files to solve a preset code found in the config file. Works only with display and animated light sequence.
+ 
 
 Instructions
 --------------------
 
+1. Decide which setup to use.
+2. Select a configuration and modify it based on your requirements according to the [How_To_Configure_JSON.md](https://github.com/ubilab-ss21/escape-room---light-code/blob/main/config_files/How_To_Configure_JSON.md) file.
+3. Run the code with the following command: 
+ ```
+      python puzzle_setyp_file.py -c config_file.json
+ ```
+4. Have fun!!!
 
 
-BOM Link
----------------
-Octopart: https://octopart.com/bom-tool/5xsz3Dhn
-
+What we could have done differently
+--------------------
+- Made use of an OLED display to display the sequence.
+- 
