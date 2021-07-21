@@ -11,7 +11,7 @@ This code sequence will either be displayed:
 Setup and components
 --------------------
 
-The demonstration will consist of 5 ESP8266 boards that will be controlling one color LED light ring and one push button each, and one ESP will be displaying the sequence to be obtained.
+The demonstration will consist of 4 ESP8266 boards that will be controlling one color LED light ring and one push button each, and one additionally ESP will be displaying the sequence to be obtained.
 Communication of the components takes place via MQTT connected through the central broker at the University.
 The logic unit will listen to messages signaling a button press and send messages to change the color of the lights according to the rules provided during initialization.
 A central concept was to make the system flexible so it can be easily initialized with different rules for how the lights change, making it easy to adjust the difficulty of the challenge.
@@ -29,12 +29,13 @@ Instructions
 --------------------
 
 1. Decide which setup file to use.
-2. Select a configuration and modify it based on your requirements according to the [How_To_Configure_JSON.md](https://github.com/ubilab-ss21/escape-room---light-code/blob/main/config_files/How_To_Configure_JSON.md) file.
-3. Run the code with the following command: 
+2. Based on your setup, load the ESP Node's with the required code from [Arduino Node Files](https://github.com/ubilab-ss21/escape-room---light-code/tree/main/Arduino_Node_Files).
+3. Select a configuration and modify it based on your requirements according to the [How_To_Configure_JSON.md](https://github.com/ubilab-ss21/escape-room---light-code/blob/main/config_files/How_To_Configure_JSON.md) file.
+4. Run the code with the following command: 
  ```
       python puzzle_setup_file.py -c config_file.json
  ```
-4. Have fun!!!
+5. Have fun!!!
 
 
 What we could have done differently
