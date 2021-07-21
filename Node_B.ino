@@ -2,8 +2,8 @@
 #include <PubSubClient.h>
 #include <Adafruit_NeoPixel.h> 
 
-const char* ssid = "ZYXEL-036";
-const char* password = "8991401155431659";
+const char* ssid = "SSID";  
+const char* password = "PASS"; 
 
 #define mqtt_server "earth.informatik.uni-freiburg.de"
 #define PIN 23  // data pin for ring

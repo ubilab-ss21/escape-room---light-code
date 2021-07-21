@@ -5,9 +5,13 @@
 	    "initial_state" : "active" ,
 	    "actions" : [
 		{
+		    "change_light_with_index" : 0 ,
+		    "by_this_many_steps" : 2
+		} ,
+		{
 		    "change_light_with_index" : 1 ,
-		    "by_this_many_steps" : 1
-		}
+		    "by_this_many_steps" : 3
+		} 
 	    ]
         } ,
         {	
@@ -16,10 +20,14 @@
 	    "actions" : [
 		{
 		    "change_light_with_index" : 0 ,
-		    "by_this_many_steps" : 1
-		}
+		    "by_this_many_steps" : 4
+		} ,
+		{
+		    "change_light_with_index" : 1 ,
+		    "by_this_many_steps" : 3
+		} 
 	    ]
-	} 
+        } 
     ] ,
     "lights" : [
 	{
@@ -28,8 +36,8 @@
 	} ,
 	{
 	    "light_id" : "LIGHT_01_ID" ,
-	    "colors" : ["0" , "1" , "2" , "3" , "4" , "5" , "6" ]
+	    "colors" : ["1" , "2" , "4" , "5" , "6" ]
 	} 
     ] ,
-    "code" : [ 4 , 0 ]
+    "code" : [ 1 , 6 ]
 }

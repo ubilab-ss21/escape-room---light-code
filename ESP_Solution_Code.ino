@@ -2,8 +2,8 @@
 #include <PubSubClient.h>
 #include <Adafruit_NeoPixel.h> 
 
-const char* ssid = "ZYXEL-036";
-const char* password = "8991401155431659";
+const char* ssid = "SSID";
+const char* password = "PASS";
 
 #define mqtt_server "earth.informatik.uni-freiburg.de"
 #define PIN 23  // data pin for ring
@@ -49,6 +49,7 @@ int j=0;
 int start_display=0;
 void callback(char* topic, byte* payload, unsigned int length){
   char l =(char)payload[0];
+  Serial.println(l);
   if(l=='D')
   {
       start_display=1;
@@ -91,6 +92,7 @@ void setup() {
     delay(500);
     Serial.println("Connecting to WiFi..");
   }
+  client.publish("ubilab/colorcode/code","",true);
   pinMode (19 , INPUT);
   pinMode (23 , INPUT);
   pinMode (18 , INPUT);
@@ -132,10 +134,10 @@ void loop() {
     }
     pixels.show();
     int p=0;
+    Serial.println(code);
     while(code[p]!='\0')
     {
       light_number = (int)code[p] - 48;
-      Serial.println(light_number);
       int arr[20]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
       int i=0;
       int color_value = rand () % 7;
