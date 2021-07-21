@@ -10,7 +10,7 @@ loop = True
 mqttBroker = "earth.informatik.uni-freiburg.de"
 main_topic = "ubilab/colorcode/"
 lights_cli = mqtt.Client("lights_publisher")
-lights_cli.connect(mqttBroker)
+lights_cli.connect(mqttBroker, keepalive=3600)
 
 with open('example_configuration_data_2.json', 'r') as json_file:
     data = json_file.read() 
@@ -24,6 +24,7 @@ def button_init_state(index):
     return config['buttons'][index]['initial_state'] == "active"
 def init_button_client(index):
     def on_message(client, userdata, message):
+        global loop
         for action in config['buttons'][index]['actions']:
             light_index = action['change_light_with_index']
             light = config['lights'][light_index]
@@ -36,7 +37,7 @@ def init_button_client(index):
         if config['code'] == lights_state:
             print("CONGRATS, You are out of here!!!")
             for light in config['lights']:                                                                                                                                                            lights_cli.publish(main_topic + light['light_id'], "C",retain=False) 
-            lights_cli.publish(main_topic + 'code', "C" , retain=False)
+            lights_cli.publish(main_topic + 'code', "C" , retain=True)
             loop = False
 
     client = mqtt.Client("buttons_listener_" + str(index))
@@ -77,7 +78,7 @@ print("Target \t\t{}".format(config['code']))
 print("Current State \t{}".format(lights_state))   
 
 while loop:
-    loop = input().lower()[0] != 'y'
+        time.sleep(.5)
 
 for client in buttons_cli:
     client.loop_stop()
