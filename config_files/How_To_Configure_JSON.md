@@ -47,7 +47,7 @@ For every button there will be a transition from all the token pools of the ligh
 The weights of those transitions will be the change of the corresponding action.
 Here is how that would look like for BUTTON_0_ID:
 
-![example button 0](images/pt-net-example-b0.png)
+![example button 0](https://github.com/ubilab-ss21/escape-room---light-code/blob/main/images/pt-net-example-b0.png)
 
 Naturaly one would think that the capacities of the lights "state" would be the number of states that this light can take, i.e. the size of its "colors" array.
 But since the state of the light can role over, for example if the current state of LIGHT_0_ID is 5 (from 0,1,...,6) and BUTTON_2_ID is pressed,
@@ -60,4 +60,4 @@ Since the initial state is always the first color in each lights "colors" array,
 
 All put together, this will result in the following p/t net that models the given example configuration:
 
-![example config](images/pt-net-entire-example-config.png)
+![example config](https://github.com/ubilab-ss21/escape-room---light-code/blob/main/images/pt-net-entire-example-config.png)
