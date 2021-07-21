@@ -2,6 +2,8 @@ import paho.mqtt.client as mqtt
 import json
 import time
 import os
+import sys
+import time
 
 clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 clearConsole()
@@ -9,11 +11,21 @@ loop = True
 
 mqttBroker = "earth.informatik.uni-freiburg.de"
 main_topic = "ubilab/colorcode/"
-lights_cli.connect(mqttBroker, keepalive=3600)
-lights_cli.connect(mqttBroker)
 
-with open('example_configuration_data_2.json', 'r') as json_file:
-    data = json_file.read() 
+lights_cli = mqtt.Client("lights_publisher")
+lights_cli.connect(mqttBroker, keepalive=3600)
+
+
+if len(sys.argv) < 3 or \
+    sys.argv[1] != '-c' and sys.argv[1] != '--config':  
+    print_usage_and_exit()   
+
+if not os.path.isfile(sys.argv[2]):      
+    print(sys.argv[2], ' is not a file!\nprovide existing CONFIG_FILE')        
+    print_usage_and_exit()         
+
+with open(sys.argv[2], 'r') as json_file:       
+    data = json_file.read()  
 config = json.loads(data)     
 
 def button_init_state(index):
@@ -73,7 +85,7 @@ print("Target \t\t{}".format(config['code']))
 print("Current State \t{}".format(lights_state))   
 
 while loop:
-    sleep(0.5)
+    time.sleep(0.5)
 
 for client in buttons_cli:
     client.loop_stop()

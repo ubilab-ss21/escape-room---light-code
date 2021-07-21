@@ -61,7 +61,7 @@ if len(sys.argv) < 3 or \
     print_usage_and_exit()
 
 if not os.path.isfile(sys.argv[2]):
-    print(sys.argv[2], ' is not a file!\nprovide existing SEED_CONFIG_FILE')
+    print(sys.argv[2], ' is not a file!\nprovide existing CONFIG_FILE')
     print_usage_and_exit()
 
 with open(sys.argv[2], 'r') as json_file:
@@ -72,7 +72,7 @@ num_lights  = len(config['lights'])
 num_buttons = len(config['buttons'])
 
 if num_lights != num_buttons:
-    print('different number of lights and buttons currently not supported!')
+    print('Different number of lights and buttons currently not supported!')
     exit()
 
 clearConsole()
@@ -83,12 +83,16 @@ infinity = solver.infinity()
 
 infeasible = True
 while infeasible:
-    print('creating and checking random configuration ...')
+    print('Creating and checking random configuration ...')
     create_random_buttons_configuration()
     infeasible = check_if_config_is_infeasible()
 
-print('feasible config found with this solution:')
+print('Feasible config found with this solution:')
 print([int(button.solution_value()) for button in solver.variables()[:num_buttons]])
+
+time.sleep(1)
+
+clearConsole()
 
 lights_cli = mqtt.Client("lights_publisher")
 lights_cli.connect(mqttBroker, keepalive=3600)
