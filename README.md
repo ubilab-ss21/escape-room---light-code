@@ -32,7 +32,7 @@ Instructions
 2. Select a configuration and modify it based on your requirements according to the [How_To_Configure_JSON.md](https://github.com/ubilab-ss21/escape-room---light-code/blob/main/config_files/How_To_Configure_JSON.md) file.
 3. Run the code with the following command: 
  ```
-      python puzzle_setyp_file.py -c config_file.json
+      python puzzle_setup_file.py -c config_file.json
  ```
 4. Have fun!!!
 
@@ -40,4 +40,4 @@ Instructions
 What we could have done differently
 --------------------
 - Made use of an OLED display to display the sequence.
-- 
+- Possibly integrated it with other puzzles
