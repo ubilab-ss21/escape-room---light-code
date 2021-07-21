@@ -20,9 +20,9 @@ A detailed guide on how to setup the Config file for different configurations is
 Right now, the digits in the sequence are in the range [0-6].
 
 There are three setups:
-- **puzzle_logic.py**       : Uses preset config files to solve a preset code found in the config file. Works only with display.
-- **puzzle_code_with_light.py**       : Uses preset config files to solve a preset code found in the config file. Works only with display and animated light sequence.
-- **puzzle_randomized_code_with_light.py**       : Uses preset config files to solve a preset code found in the config file. Works only with display and animated light sequence.
+- **puzzle_logic.py**       : Uses preset config files to solve a preset code found in the config file. Works only with the display.
+- **puzzle_code_with_light.py**       : Uses preset config files to define a preset code found in the config file. Works with the display and the animated light sequence.
+- **puzzle_randomized_code_with_light.py**       : Uses preset config files to determine a random code generated using a petri net. Works only with  the display and the animated light sequence.
  
 
 Instructions
