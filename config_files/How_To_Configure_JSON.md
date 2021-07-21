@@ -5,42 +5,35 @@ This JSON stores all informations necessary to define the behaviour of the syste
 
 It can make the system totally adaptable to different difficulties as well as different settings (more lights, buttons, etc).
 
+
 JSON structure
----
+-----------------
 
 The JSON basically contains 3 arrays:
- - buttons: define the  number of buttons and their actions in case random setup is not used
- - lights
- - code
+ - buttons : defines the  number of buttons and their actions. (in case of puzzle_logic.py and puzzle_code_with_light.py)
+ - lights  : defines the digits which should be displayed on the lights. Default:[0-6] (can be modified according to hardness level)
+ - code    : defines the preset code which needs to be obtained. (in case of puzzle_logic.py and puzzle_code_with_light.py, for randomizer just leave the code array as it is)
 
-The code array is just the numerical representation of the code that has to be entered.
 
-The lights and buttons each have unique IDs which will also serve as mqtt subtopics.
-
-The lights also have arrays of hex color values.
-
-The buttons have an initial state (which is only for integration into a real escape room and will be active for our demonstrator),
-as well as an array of actions that tells which lights will be changed by how much.
-
-How the logic unit would handle this information
----
+How the logic unit handle's this information
+-----------------
 
 - The first color in the array of each light will be the initial color that this light shows when the system starts up.
-- This corresponds to the numerical representation [0,0,0]
-- When the button with id BUTTON_0_ID is press, the logic unit will receive a message on the according subtopic
-- it will then look up the actions to take, in this case changing lights with id's LIGHT_1_ID and LIGHT_2_ID by 1 and 2
-- according to this rule, it will
-  - update its internally saved state to [0,1,2]
-  - publish the according colors on the according subtopics
-  - and check if the correct code has been entered
+- This corresponds to the numerical representation [0,0,0] (if you are using a configuration of 3)
+- When the button with ID BUTTON_0_ID is pressed, the logic unit will receive a message on the respective subtopic.
+- It will then look up the actions to take, in this case for example lets assume it's changing lights with ID's LIGHT_01_ID and LIGHT_02_ID by 1 and 2
+- According to this rule, it will:
+  - Update its internally saved state to [0,1,2]
+  - Publish the according colors on the according subtopics
+  - Check if the correct code has been entered
 
 Options for adaptability
----
+-----------------
 
-first of all, it is really easy and quick to change the different colors, code and button press behaviour of a given system.
+First of all, it is really easy and quick to change the different colors, code and button press behaviour of a given system.
 
 But the idea behind the IDs is that each button and light that is installed in the escape room has it's own ID.
-If you want to ad a button, maybe even without adding a light, you just add an entry in the buttons array and specify the rules for this button. Same goes for adding lights.
+If you want to add a button, maybe even without adding a light, you just add an entry in the buttons array and specify the rules for this button. Same goes for adding lights.
 
 Checking feasibility for a given configuration
 ===
