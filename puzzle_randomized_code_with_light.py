@@ -113,7 +113,7 @@ def init_button_client(index):
             print("CONGRATS, You are out of here!!!")
             for light in config['lights']:
                 lights_cli.publish(main_topic + light['light_id'], "C",retain=False) 
-            lights_cli.publish(main_topic + 'code', "C" , retain=False)
+            lights_cli.publish(main_topic + 'code', "C" , retain=True)
             loop = False
 
     client = mqtt.Client("buttons_listener_" + str(index))
