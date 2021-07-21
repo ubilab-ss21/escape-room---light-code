@@ -28,7 +28,7 @@ There are three setups:
 Instructions
 --------------------
 
-1. Decide which setup to use.
+1. Decide which setup file to use.
 2. Select a configuration and modify it based on your requirements according to the [How_To_Configure_JSON.md](https://github.com/ubilab-ss21/escape-room---light-code/blob/main/config_files/How_To_Configure_JSON.md) file.
 3. Run the code with the following command: 
  ```
