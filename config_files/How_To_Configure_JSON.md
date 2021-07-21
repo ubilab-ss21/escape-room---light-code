@@ -1,16 +1,15 @@
 Explanation of the example configuration data JSON
 ========
 
-This JSON will store all informations necessary to define the behaviour of the system.
+This JSON stores all informations necessary to define the behaviour of the system.
 
-We're not 100% sure yet how to provide it to the logic unit (initially we'll just hardcode a similar example),
-but it will make the system totally adaptable to different difficulties as well as different settings (more lights, buttons, etc).
+It can make the system totally adaptable to different difficulties as well as different settings (more lights, buttons, etc).
 
 JSON structure
 ---
 
 The JSON basically contains 3 arrays:
- - buttons
+ - buttons: define the  number of buttons and their actions in case random setup is not used
  - lights
  - code
 
