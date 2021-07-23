@@ -11,7 +11,7 @@ This code sequence will either be displayed:
 Setup and components
 --------------------
 
-The demonstration will consist of 4 ESP8266 boards that will be controlling one color LED light ring and one push button each, and one additionally ESP will be displaying the sequence to be obtained.
+The demonstration will consist of 4 ESP-32 boards that will be controlling one color LED light ring and one push button each, and one additionally ESP will be displaying the sequence to be obtained.
 Communication of the components takes place via MQTT connected through the central broker at the University.
 The logic unit will listen to messages signaling a button press and send messages to change the color of the lights according to the rules provided during initialization.
 A central concept was to make the system flexible so it can be easily initialized with different rules for how the lights change, making it easy to adjust the difficulty of the challenge.
