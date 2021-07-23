@@ -49,4 +49,5 @@ Instructions
 What we could have done differently
 --------------------
 - Made use of an OLED display to display the sequence.
-- Possibly integrated it with other puzzles
+- Possibly integrated it with other puzzles.
+- Mdae use of small e-ink displays to show node number at the ESP's (increase randomness).
