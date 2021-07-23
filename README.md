@@ -11,7 +11,7 @@ This code sequence will either be displayed:
 Setup and components
 --------------------
 
-The demonstration will consist of 4 ESP-32 boards that will be controlling one color LED light ring and one push button each, and one additionally ESP will be displaying the sequence to be obtained.
+The demonstration will consist of 4 ESP-32 boards that will be controlling one color LED light ring (Grove LED light rings in our case) and one push button each, and one additionally ESP will be displaying the sequence to be obtained.
 Communication of the components takes place via MQTT connected through the central broker at the University.
 The logic unit will listen to messages signaling a button press and send messages to change the color of the lights according to the rules provided during initialization.
 A central concept was to make the system flexible so it can be easily initialized with different rules for how the lights change, making it easy to adjust the difficulty of the challenge.
@@ -23,7 +23,15 @@ There are three setups:
 - **puzzle_logic.py**       : Uses preset config files to solve a preset code found in the config file. Works only with the display.
 - **puzzle_code_with_light.py**       : Uses preset config files to define a preset code found in the config file. Works with the display and the animated light sequence.
 - **puzzle_randomized_code_with_light.py**       : Uses preset config files to determine a random code generated using a petri net. Works only with  the display and the animated light sequence.
- 
+
+Pythin Libraries Required:
+- [ortools](https://developers.google.com/optimization/install)
+- [paho-mqtt](https://www.eclipse.org/paho/index.php?page=clients/python/index.php)
+
+Arduino Libraries Required:
+- [Adafruit-Neopixel](https://github.com/adafruit/Adafruit_NeoPixel)
+- [pubsub-client](https://www.arduino.cc/reference/en/libraries/pubsubclient/) 
+
 
 Instructions
 --------------------
